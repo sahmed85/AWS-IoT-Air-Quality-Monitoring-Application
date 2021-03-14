@@ -4,7 +4,7 @@
 *.pem
 *.ppk
 ##environment setup scripts
-api-django-app/env.py
+aqi-django-app/env.py
 ##OS files py cahce files
 *.pyc
 *.DS_Store
