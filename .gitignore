@@ -1,0 +1,11 @@
+##PDF files
+*.pdf
+##Private keys
+*.pem
+*.ppk
+##environment setup scripts
+api-django-app/env.py
+##OS files py cahce files
+*.pyc
+*.DS_Store
+
