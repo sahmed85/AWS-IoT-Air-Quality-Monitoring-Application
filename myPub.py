@@ -2,6 +2,7 @@ from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
 import logging
 import time
 import argparse
+import sys,os
 import json
 import datetime
 import random
@@ -9,10 +10,10 @@ from dateutil.tz import tzoffset
 
 AllowedActions = ['both', 'publish', 'subscribe']
 
-host = '<IOT_API_ENDPOINT>'
-rootCAPath = '<ROOT_CA_CERTIFICATE>'
-certificatePath = '<THING_CERTIFICATE_PEM>'
-privateKeyPath = '<THING_PRIVATE_PEM>'
+host = 'a27cwpwdewry67-ats.iot.us-east-1.amazonaws.com'
+rootCAPath = 'c:/Users/Shadman/OneDrive - Georgia Institute of Technology/Desktop/ECE4150/Lab3/certs_and_keys/root-CA.crt'
+certificatePath = 'c:/Users/Shadman/OneDrive - Georgia Institute of Technology/Desktop/ECE4150/Lab3/certs_and_keys/AQI-IoT-Thing.cert.pem'
+privateKeyPath = 'c:/Users/Shadman/OneDrive - Georgia Institute of Technology/Desktop/ECE4150/Lab3/certs_and_keys/AQI-IoT-Thing.private.key'
 useWebsocket = False
 clientId = 'basicPubSub'
 topic = 'sdk/test/Python'
@@ -23,6 +24,8 @@ if useWebsocket:  # When no port override for WebSocket, default to 443
 if not useWebsocket:  # When no port override for non-WebSocket, default to 8883
     port = 8883
 
+print("FILE PATH")
+print(os.path.dirname(sys.argv[0]))
 # Configure logging
 '''
 logger = logging.getLogger("AWSIoTPythonSDK.core")

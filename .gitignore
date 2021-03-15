@@ -4,7 +4,7 @@
 *.pem
 *.ppk
 ##environment setup scripts
-env.py
+aqi-django-app/env.py
 ##certificates and keys
 certs_and_keys/*
 ##OS files py cahce files
