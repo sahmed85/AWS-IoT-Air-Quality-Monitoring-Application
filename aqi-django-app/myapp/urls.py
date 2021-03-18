@@ -20,6 +20,7 @@ urlpatterns = patterns('',
 
     url(r'^filter_raw_data/(?P<asset_filter>[\w-]+)$', views.filter_raw_data, name ='filter_raw_data'),
     url(r'^filter_raw_data_time/(?P<time_filter>[\w-]+)$', views.filter_raw_data_time, name ='filter_raw_data_time'),
-
+    url(r'^reports/$', views.report_page, name = 'report_page'),
+    url(r'^analytics/$', views.analytics_page, name = 'analytics_page')
 
  )

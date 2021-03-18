@@ -44,6 +44,8 @@ from django.utils import timezone
 from boto3.dynamodb.conditions import Key, Attr
 # import datetime
 # from dateutil.tz import tzoffset
+# import the csv lib 
+import csv
 
 sys.path.append(os.path.abspath(os.path.join('..', 'utils')))
 from env import AWS_ACCESS_KEY, AWS_SECRET_ACCESS_KEY, AWS_REGION
@@ -186,5 +188,29 @@ def filter_raw_data_time(request,time_filter):
 def dashboard_home(request):    
     variables = RequestContext(request, {})
     return render_to_response('aqi-dashboard.html', variables)
+
+# this function will create a csv file of all the raw data for all stations
+def report_page(request):
+    # return a MIME type, text/csv to the requester
+    # Create the HTTPResponse object with the CSV header
+    response = HttpResponse(content_type = 'text/csv')
+    response['Content-Disposition'] = 'attachment; filename = "rawdata.csv"'
+    writer = csv.writer(response)
+    writer.writerow(['StationID','timestamp','pm10','pm2_5','so2'])
+    # fetch the data from the database table and use writerow member function to add to the csv rows
+    dyanamodb_response = table.scan()
+    items = dyanamodb_response['Items']
+    # loop through each item returned from DynamoDB and write the csv row
+    for item in items:
+        writer.writerow([item['stationID'],int(item['timestamp']),float(item['data']['pm10']),float(item['data']['pm2_5']),float(item['data']['so2'])])
+    # return the csv
+    return response
+
+
+# this function will render the graph view for real time data visualization
+def analytics_page(request):
+    # return the template raw-data-graphs.html 
+    return render(request, 'raw-data-graphs.html', {})
+
 
 

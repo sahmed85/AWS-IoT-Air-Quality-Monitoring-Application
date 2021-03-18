@@ -10,4 +10,5 @@ certs_and_keys/*
 ##OS files py cahce files
 *.pyc
 *.DS_Store
-
+## Ignore CSV files for making graphs
+*.csv

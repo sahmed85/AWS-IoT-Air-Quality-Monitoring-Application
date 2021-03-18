@@ -86,7 +86,7 @@ def getData():
     
     return messageJson
 
-while True:        
+for loopCount in range(0,11):        
     message = getData()
     messageJson = json.dumps(message)
     myAWSIoTMQTTClient.publish(topic, messageJson, 1)
